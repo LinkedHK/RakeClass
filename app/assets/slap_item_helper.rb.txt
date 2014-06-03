@@ -1,0 +1,20 @@
+module SlapItemHelper
+  require 'slap_item'
+  def create_pagination(limit)
+    html = "<h1>Hello World!</h1>"
+    content_tag(:li) do
+      "Test !!!!!!!!!!!!!!!!!!!!!"
+    end
+    @items_number = SlapItem.count
+    @res = @items_number/limit
+    content_tag(:ul,:class => 'pagination')  do
+          (0..@res).each do|i|
+            content_tag(:li) do
+            #  link_to slap_pagination_path(:pg => i)
+              "Test !!!!!!!!!!!!!!!!!!!!!"
+            end
+          end
+    end
+  end
+
+end

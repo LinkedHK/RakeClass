@@ -1,0 +1,28 @@
+<h1>ListingS!</h1>
+<p id="notice"><%= notice %></p>
+
+<% if @item_data%>
+    <ul>
+    <% @item_data.each do |item|%>
+         <li>
+           <ul>
+             <li><%= item.item_title%></li>
+             <li> <%= link_to 'Edit', slap_item_edit_path(:id => item.id) %></li>
+           </ul>
+         </li>
+    <%end%>
+    </ul>
+    <ul class="pagination">
+      <li><a href="#">&laquo;</a></li>
+      <li><a href="#">1</a></li>
+      <li><a href="#">2</a></li>
+      <li><a href="#">3</a></li>
+      <li><a href="#">4</a></li>
+      <li><a href="#">5</a></li>
+      <li><a href="#">&raquo;</a></li>
+    </ul>
+    <%= create_pagination(@page,5) %>
+    <h1>Total number of items: <%= link_to  "Test",slap_pagination_path(:pg => 4)   %> </h1>
+
+
+<%end%>
