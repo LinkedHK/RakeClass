@@ -3,7 +3,8 @@ class SlapItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit,:update_item]
   def index
   @page = params[:pg].to_i
-   @item_data = SlapItem.gen_pagination(@page)
+  @limit = 5
+   @item_data = SlapItem.gen_pagination(@page,@limit)
   end
   # GET /slap_items/new
   def new

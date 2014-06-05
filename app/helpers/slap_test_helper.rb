@@ -1,47 +1,118 @@
 module SlapTestHelper
   require 'slap_item'
   def create_pagination(page,limit)
+   page  < 1 ? page = 1 : page
 
-   @pagination_limit = 2
-   @elemts_per = 5
+   num_pages =  (SlapItem.count/limit).ceil
 
-   @page  <= 0 ? page = 1 : page
+        if SlapItem.count % limit != 0
+        num_pages += 1
+        else
 
-   @total = SlapItem.count/@elemts_per
-     content_tag(:ul,:class => "pagination")   do
-       (0..@pagination_limit-1).each do |i|
-         if page > @pagination_limit-1 && i == 0
+        end
 
 
-           concat(
-               content_tag(:li) do
-                 link_to "«", slap_pagination_path(:pg => page-1)
-               end
-             )
+
+   num_links = 3
+   start_pgn = 1
+   end_pgn = 1
+
+
+
+content_tag(:ul,:class => "pagination")   do
+
+  if num_pages <= 1
+    return
+  end
+
+  if num_links > num_pages
+    start_pgn = 1
+    end_pgn = num_pages
+  end
+  if page > 1
+    calc = page-1
+    concat(print_li_a(calc,"«",[]))
+  end
+  if page < num_links
+    start_pgn = 1
+    end_pgn = num_links
+  else
+         if num_pages>num_links
+           concat(print_li_a(1,1,[]))
          end
-         @calc = page+i
-         if @calc > @total
-           break
-         end
-         concat(
-             content_tag(:li) do
-               link_to @calc, slap_pagination_path(:pg => @calc)
-             end
-         )
-           if page+1 < @total && i == @pagination_limit-1
-             concat(
-                 content_tag(:li) do
-                   link_to "»", slap_pagination_path(:pg => @calc+1)
-                 end
-             )
-           end
+    if page > num_links
+      draw_dotes
+    end
+    calc =  (num_links/2).floor
+    start_pgn = page-calc
+    end_pgn = page+calc
 
-       end
+    if start_pgn < 1
+      end_pgn +=  start_pgn.abs+1
+      start_pgn = 1
+    end
+    if end_pgn > num_pages
+      start_pgn -= (end_pgn-num_pages)
+      end_pgn = num_pages
+    end
 
-     end
+  end
+
+  (start_pgn..end_pgn).each  do |i|
+
+    if i > num_pages
+      break
+    end
+    if i == page
+      concat(print_li_a(i,i,["active"]))
+    else
+      concat(print_li_a(i,i,[]))
+    end
+  end
+
+  if end_pgn < num_pages
+    draw_dotes
+  end
+
+  if page < num_pages-1 && num_pages>num_links
+    concat(print_li_a(page+1,"»",[]))
+    concat(print_li_a(num_pages,num_pages,[]))
+  end
+
+
+
+    end
+
+  end
+
+  def print_li_a(ref,capt,attr)
+    content_tag(:li, :class => attr.join(" ")) do
+      link_to capt, slap_pagination_path(:pg => ref),class: attr.join(" ")
+    end
 
   end
   def hello_world(name)
     "hello #{name}"
   end
+
+  def draw_dotes
+    concat(
+        content_tag(:li) do
+          content_tag(:a) do
+            " .... "
+          end
+
+        end
+    )
+  end
+  def draw_back(page)
+    concat(print_li_a(page,"«",[]))
+  end
+
+  def draw_next(page)
+    concat(print_li_a(page+1,"»",[]))
+  end
+
+
+
 end
