@@ -1,4 +1,3 @@
-require 'slap_item'
 class SlapItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit,:update_item]
   def index

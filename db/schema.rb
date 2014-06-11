@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140528062027) do
+ActiveRecord::Schema.define(version: 20140610125146) do
+
+  create_table "sessions", force: true do |t|
+    t.string   "session_id", null: false
+    t.text     "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true, using: :btree
+  add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
 
   create_table "slap_items", force: true do |t|
     t.string   "item_title"
@@ -19,6 +29,20 @@ ActiveRecord::Schema.define(version: 20140528062027) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "slap_users", force: true do |t|
+    t.string   "username",   limit: 15, null: false
+    t.string   "email",                 null: false
+    t.string   "first_name", limit: 20
+    t.string   "last_name",  limit: 20
+    t.string   "password",              null: false
+    t.string   "language",   limit: 12
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "slap_users", ["created_at", "updated_at"], name: "index_slap_users_on_created_at_and_updated_at", using: :btree
+  add_index "slap_users", ["username", "email"], name: "index_slap_users_on_username_and_email", unique: true, using: :btree
 
   create_table "statuses", force: true do |t|
     t.string   "name"

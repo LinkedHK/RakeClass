@@ -11,4 +11,9 @@ class SlapItem < ActiveRecord::Base
     @item = SlapItem.select([:item_title,:item_description,:id]).limit(limit).offset(@offset)
     return @item
   end
+
+  def self.recent_items(past_date)
+
+
+  end
 end

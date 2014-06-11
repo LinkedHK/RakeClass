@@ -14,3 +14,9 @@
  *= require_self
  *= bootstrap.min
  */
+.sign_form_wrapper{
+    margin-top: 50px;
+}
+.form-signin-heading{
+    text-align: center;
+}

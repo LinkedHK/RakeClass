@@ -1,23 +1,20 @@
 module SlapTestHelper
   require 'slap_item'
-  def create_pagination(page,limit)
+
+def create_pagination(page,limit)
    page  < 1 ? page = 1 : page
 
    num_pages =  (SlapItem.count/limit).ceil
 
         if SlapItem.count % limit != 0
-        num_pages += 1
+         num_pages += 1
         else
 
         end
 
-
-
    num_links = 3
    start_pgn = 1
    end_pgn = 1
-
-
 
 content_tag(:ul,:class => "pagination")   do
 
@@ -79,11 +76,9 @@ content_tag(:ul,:class => "pagination")   do
     concat(print_li_a(num_pages,num_pages,[]))
   end
 
-
-
     end
 
-  end
+end
 
   def print_li_a(ref,capt,attr)
     content_tag(:li, :class => attr.join(" ")) do

@@ -29,6 +29,15 @@ en:
   item_successfully_added: "Item has been successfully added!"
   item_successfully_updated: "Item has been successfully updated!"
   item_update_failure: "Failed to update Item. Try again."
+  user_auth_signin_heading: "Creating a new account"
+  user_auth_sign_text_email: "Email address"
+  user_auth_sign_text_username: "Username"
+  user_auth_sign_text_password: "Password"
+  user_auth_sign_text_re_passowrd: "Re-Enter your password"
+  user_auth_sign_text_email_holder: "Your email address"
+  user_auth_sign_in_text_submit: "Sign in"
+  user_auth_sign_up_text_submit: "Sign up"
+  user_auth_sign_up_login_head: "Sign in to middle front"
   activerecord:
     attributes:
       slapitem:
