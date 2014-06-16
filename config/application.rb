@@ -36,7 +36,7 @@ module Slap
   config.autoload_paths += %W(
     #{config.root}/app/controllers/concerns
     )
-    config.autoload_paths +=  Dir["#{config.root}/app/models/**/","#{config.root}/lib/**/"]
+    config.autoload_paths +=  Dir["#{config.root}/app/models/concerns/**/","#{config.root}/lib/**/"]
 
   end
 end

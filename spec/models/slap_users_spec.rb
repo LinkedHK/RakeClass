@@ -13,5 +13,10 @@ describe SlapUser do
         expect(user).not_to be_valid
       end
     end
+    it "User and email are already used" do
+      FactoryGirl.create(:slap_user)
+      user = FactoryGirl.build(:slap_user)
+      expect(user).not_to be_valid
+    end
   end
 end

@@ -28,6 +28,7 @@ class SlapItemsController < ApplicationController
   # POST /slap_edit/create
   def create
     @item  = SlapItem.new(item_params)
+
     respond_to do |format|
       if @item.save
       format.html{redirect_to slap_index_url, notice: t(:item_successfully_added)}

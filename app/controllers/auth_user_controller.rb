@@ -1,36 +1,61 @@
 class AuthUserController < ApplicationController
-  def login
 
+  def login
+    @login_user = SlapLogin.new
   end
 
   def post_login
+    @login_user = SlapLogin.new(login_data)
+    respond_to do |format|
+      if  @login_user.valid?
+        user = SlapLogin.auth_by_email(@login_user[:email],@login_user[:password])
+            if user
+              set_user_session(user)
+              format.html { redirect_to :slap_index, notice:  'You have been successfully signed in!' }
+              format.json { render  :login, status: :created, location: :slap_index }
+            else
+              format.html{render :action => :signup }
+              format.json{render json: @signup_user.errors,status: :unprocessable_entity }
+            end
+       end
+    end
+
+
   end
   # Get /usr/signup
   def signup
-    @sign_user = SlapUser.new
+    @signup_user = SlapUser.new
   end
   # Post /usr/signup
   def post_signup
 
-    @sign_user = SlapUser.new(sign_data)
+    @signup_user = SlapUser.new(signup_data)
 
     respond_to do |format|
-      if @sign_user.save
-      #SlapAuthService.create_account(session)
-
-        format.html { redirect_to :slap_index, notice:  'Status was successfully created.' }
+      if  @signup_user.save
+        user = SlapUser.order("created_at").last(1)
+        user = user.last
+        set_user_session(user)
+        format.html { redirect_to :slap_index, notice:  'You have been successfully signed up!' }
         format.json { render  :login, status: :created, location: :slap_index }
       else
         format.html{render :action => :signup }
-        format.json{render json: @sign_user.errors,status: :unprocessable_entity }
+        format.json{render json: @signup_user.errors,status: :unprocessable_entity }
       end
     end
 
   end
 
-  def sign_data
+  def signup_data
     params.require(:slap_user).permit(:email,:username,:password,:password_confirmation)
   end
+
+  def login_data
+    params.require(:slap_login).permit(:email,:password)
+  end
+
+
+
 
 
 end
