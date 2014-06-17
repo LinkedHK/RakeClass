@@ -1,16 +1,24 @@
 <div class="sign_form_wrapper container">
-  <% if @login_user.errors.any? %>
-      <div id="error_explanation bg-danger">
-        <h2><%= pluralize(@login_user.errors.count, 'error') %> occurred during creating an account</h2>
-        <ul class="bg-danger">
-          <% @login_user.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
-  <% end %>
+
+
   <%= form_for(@login_user,:url => auth_post_login_path,:role => "form") do |f| %>
       <h2 class="form-signin-heading"><%= t(:user_auth_signin_heading)%></h2>
+      <% if @login_user.errors.any? %>
+          <div id="error_explanation bg-danger">
+
+            <h2><%= pluralize(@login_user.errors.count, 'error') %> occurred during creating an account</h2>
+            <ul class="bg-danger">
+              <% @login_user.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+      <% end %>
+      <% flash.each do |name, msg| -%>
+          <ul class="bg-danger">
+            <li><%= msg %></li>
+          </ul>
+      <% end -%>
       <div class="form-group">
         <label for="user_email"><%= t(:user_auth_sign_text_email) %></label>
         <%= f.email_field :email,{:class => "form-control",:maxlength => 255,:require  => "require"}%>
@@ -22,6 +30,5 @@
       <div class="form-group">
         <%= f.submit(t(:user_auth_sign_up_text_submit),{:class =>"btn btn-lg btn-primary btn-block", :name => "sign_in"})%>
       </div>
-
   <% end %>
 </div>

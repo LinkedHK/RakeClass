@@ -35,12 +35,13 @@ RSpec.describe AuthUserController, :type => :controller do
       it "Sign in user" do
         FactoryGirl.create(:slap_user)
         user_attributes=  FactoryGirl.build(:user_login).attributes
-          post :post_login, {slap_login: user_attributes}
-          expect redirect_to root_url
-          assigns(:notice)
-          assigns(session[:user_id])
-
+        post :post_login, {slap_login: user_attributes}
+        expect redirect_to :root_url
       end
+
+    end
+    describe "Can user signout" do
+
 
     end
 

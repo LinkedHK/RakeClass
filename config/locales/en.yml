@@ -38,6 +38,9 @@ en:
   user_auth_sign_in_text_submit: "Sign in"
   user_auth_sign_up_text_submit: "Sign up"
   user_auth_sign_up_login_head: "Sign in to middle front"
+  login_failure: "Invalid email/password. Please try again."
+  successful_login: "You have been successfully signed in!"
+  successful_signout: "You have been successfully signed out!"
   activerecord:
     attributes:
       slapitem:

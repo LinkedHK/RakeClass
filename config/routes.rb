@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   post '/usr/login' , to: 'auth_user#post_login', as: 'auth_post_login'
   get '/usr/signup' , to: 'auth_user#signup', as: 'auth_user_signup'
   post '/usr/signup' , to: 'auth_user#post_signup', as: 'auth_post_signup'
+  get '/usr/logout' , to: 'auth_user#logout', as: 'auth_user_logout'
 
   #resource :slap_items
 #get ':controller(/:action)', controller: 'slap_items'
