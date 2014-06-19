@@ -1,6 +1,8 @@
 module Concerns
   module UserSession
-       extend ActiveSupport::Concern
+       def self.included(base)
+        base.helper_method :has_id
+       end
           def set_user_session(user,temporary = false)
             session[:user_id] = user[:id]
             if temporary
@@ -9,7 +11,6 @@ module Concerns
               session[:tmp_session] = 0
             end
           end
-
           def has_id
              session.has_key?("user_id")
           end

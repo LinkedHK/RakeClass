@@ -24,6 +24,8 @@ en:
   nav_logo: "Middle Front"
   nav_home: "Home"
   nav_login: "Login"
+  nav_logout: "Logout"
+  nav_signup: "Signup"
   item_title: "Item Title"
   item_description: "Item description"
   item_successfully_added: "Item has been successfully added!"
@@ -39,8 +41,9 @@ en:
   user_auth_sign_up_text_submit: "Sign up"
   user_auth_sign_up_login_head: "Sign in to middle front"
   login_failure: "Invalid email/password. Please try again."
-  successful_login: "You have been successfully signed in!"
+  successful_login: "You have been successfully logged in!"
   successful_signout: "You have been successfully signed out!"
+  successful_signup: "Account has been successfully created!"
   activerecord:
     attributes:
       slapitem:

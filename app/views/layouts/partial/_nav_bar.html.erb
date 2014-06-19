@@ -11,7 +11,12 @@
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav pull-right">
         <li><%= link_to t(:nav_home),:root %> </li>
-        <li><%= link_to t(:nav_login),:root %></li>
+        <% if has_id  %>
+            <li><%= link_to t(:nav_logout),:auth_user_logout %></li>
+            <% else %>
+            <li><%= link_to t(:nav_login),:auth_post_login %></li>
+            <li><%= link_to t(:nav_signup),:auth_user_signup %></li>
+          <% end %>
       </ul>
     </div><!--/.nav-collapse -->
   </div>

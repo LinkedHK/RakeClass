@@ -30,13 +30,13 @@ class AuthUserController < ApplicationController
         set_user_session(user)
         respond_to do |format|
           format.html { redirect_to :slap_index, notice:  t(:successful_login) }
-          format.json { render  :login, status: :signed, location: :slap_index }
+          format.json { render json: "Successful", status: :signed, location: :slap_index }
         end
       else
         flash[:notice] = t(:login_failure)
         respond_to do |format|
           format.html { render  :action =>  :login}
-          format.json { render  :login, status: :failure, location: :auth_post_login }
+          format.json { render json: t(:login_failure), status: :unprocessable_entity, location: :auth_post_login }
         end
 
       end

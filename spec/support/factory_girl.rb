@@ -6,4 +6,6 @@ require 'faker'
 
 RSpec.configure do |config|
 
+
+
 end

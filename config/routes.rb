@@ -36,6 +36,15 @@ Rails.application.routes.draw do
   post '/usr/signup' , to: 'auth_user#post_signup', as: 'auth_post_signup'
   get '/usr/logout' , to: 'auth_user#logout', as: 'auth_user_logout'
 
+
+  namespace :api, defaults: {format: :json} do
+    scope module: :v1, constraints: ApiConstraints.new(version: 1, default: :true) do
+      post '/usr/rest/v1/login' , to: 'user_sessions#post_login', as: 'api_rest_user_login'
+      post '/usr/rest/v1/signup' , to: 'user_sessions#post_signup', as: 'api_rest_rest_user_signup'
+      post '/usr/rest/v1/logout' , to: 'user_sessions#logout', as: 'api_rest_rest_user_logout'
+    end
+  end
+
   #resource :slap_items
 #get ':controller(/:action)', controller: 'slap_items'
 

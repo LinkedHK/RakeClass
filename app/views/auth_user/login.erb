@@ -1,1 +1,24 @@
 <%= render 'login_form' %>
+<script>
+
+  $(function(){
+      $("#new_slap_login").on('submit',function(e){
+          e.preventDefault();
+          $form = $("#new_slap_login");
+          var form_data = $form.serialize();
+          var request = $.ajax({
+              data: form_data,
+              type: "POST",
+              url: "<%= url_for(:auth_post_login)  %>",
+              dataType: "json",
+              cache: false
+          });
+          request.done(function(response){
+              console.log(response);
+          });
+
+
+      });
+
+  });
+</script>
