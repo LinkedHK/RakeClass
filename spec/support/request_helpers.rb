@@ -2,7 +2,7 @@
 module Requests
   module JsonHelpers
     def parse_json(response)
-      @json ||= JSON.parse(response.body)
+      @json ||= JSON.parse(response.body)   rescue []
     end
     def create_slap_user_login
       FactoryGirl.create(:slap_user)
