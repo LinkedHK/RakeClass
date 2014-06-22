@@ -1,4 +1,4 @@
-class AuthUserController < ApplicationController
+class SlapUser::AuthUserController < ApplicationController
   before_action :check_auth, only: [:login,:post_login,:signup,:post_signup]
   def check_auth
     if has_id
@@ -68,9 +68,6 @@ class AuthUserController < ApplicationController
   def login_data
     params.require(:slap_login).permit(:email,:password)
   end
-
-
-
 
 
 end

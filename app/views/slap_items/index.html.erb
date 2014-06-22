@@ -20,7 +20,7 @@
       <li><a href="#">5</a></li>
       <li><a href="#">&raquo;</a></li>
     </ul>
-    <%= create_pagination(@page,@limit) %>
+    <%= item_pagination(@page,@limit) %>
     <h1>Total number of items: <%= link_to  "Test",slap_pagination_path(:pg => 4)   %> </h1>
 
 

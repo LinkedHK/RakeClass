@@ -1,12 +1,11 @@
-module SlapTestHelper
-  require 'slap_item'
+module PaginationHelper
 
-def create_pagination(page,limit)
+
+def create_pagination(col_length,page,limit)
    page  < 1 ? page = 1 : page
 
-   num_pages =  (SlapItem.count/limit).ceil
-
-        if SlapItem.count % limit != 0
+   num_pages =  (col_length/limit).ceil
+        if col_length % limit != 0
          num_pages += 1
         else
 
@@ -107,7 +106,4 @@ end
   def draw_next(page)
     concat(print_li_a(page+1,"»",[]))
   end
-
-
-
 end

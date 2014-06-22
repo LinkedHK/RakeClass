@@ -11,6 +11,13 @@ class ApplicationController < ActionController::Base
       format.json { render json: response, status: :unprocessable_entity }
     end
   end
+  rescue_from(ActionController::InvalidAuthenticityToken) do |token_missing_exception|
+    error = {}
+    response = { result: 0, info: 'auth token is missing' }
+    respond_to do |format|
+      format.json { render json: response, status: :unprocessable_entity }
+    end
+  end
 
 
 end

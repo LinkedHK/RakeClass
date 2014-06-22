@@ -29,12 +29,19 @@ Rails.application.routes.draw do
   post 'slap_items/operation/update/:id', to: 'slap_items#update_item', as: 'slap_item_update'
   post 'slap_items/operation/create', to: 'slap_items#create', as: 'slap_item_create'
 
-  get '/usr' , to: 'auth_user#index', as: 'auth_user_index'
-  get '/usr/login' , to: 'auth_user#login', as: 'auth_user_login'
-  post '/usr/login' , to: 'auth_user#post_login', as: 'auth_post_login'
-  get '/usr/signup' , to: 'auth_user#signup', as: 'auth_user_signup'
-  post '/usr/signup' , to: 'auth_user#post_signup', as: 'auth_post_signup'
-  get '/usr/logout' , to: 'auth_user#logout', as: 'auth_user_logout'
+
+    scope "/usr" , module: :slap_user   do
+      get '/' , to: 'auth_user#index', as: 'auth_user_index'
+      get '/login' , to: 'auth_user#login', as: 'auth_user_login'
+      post '/login' , to: 'auth_user#post_login', as: 'auth_post_login'
+      get '/signup' , to: 'auth_user#signup', as: 'auth_user_signup'
+      post '/signup' , to: 'auth_user#post_signup', as: 'auth_post_signup'
+      get '/logout' , to: 'auth_user#logout', as: 'auth_user_logout'
+    end
+
+
+
+
 
 
   namespace :api, defaults: {format: :json} do

@@ -29,7 +29,9 @@ class SlapUser < ActiveRecord::Base
   end
 
 
+  def get_saved_users
 
+  end
 end
 
 
