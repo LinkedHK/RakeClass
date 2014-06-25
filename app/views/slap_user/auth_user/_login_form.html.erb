@@ -1,6 +1,5 @@
 <div class="sign_form_wrapper container">
 
-
   <%= form_for(@login_user,:url => auth_post_login_path,:role => "form") do |f| %>
       <h2 class="form-signin-heading"><%= t(:user_auth_signin_heading)%></h2>
       <% if @login_user.errors.any? %>
@@ -30,7 +29,12 @@
       <div class="form-group">
         <%= f.submit(t(:user_auth_sign_up_text_submit),{:class =>"btn btn-lg btn-primary btn-block", :name => "sign_in"})%>
       </div>
+      <div class="form-group">
+        <label>Login with: </label>
+        <%= render 'fb_auth' %>
+      </div>
   <% end %>
+
 </div>
 
 

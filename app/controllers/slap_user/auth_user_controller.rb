@@ -1,11 +1,16 @@
 class SlapUser::AuthUserController < ApplicationController
   before_action :check_auth, only: [:login,:post_login,:signup,:post_signup]
+ #before_action :resolve_fb_user, only: [:login]
+  def resolve_fb_user
+    end
+
   def check_auth
     if has_id
       redirect_to :slap_index
     end
   end
   def login
+   # @fb = Koala::Facebook::OAuth.new(Rails.application.config.facebook_app_id, Rails.application.config.facebook_secret_app_id)
     @login_user = SlapLogin.new
   end
 
@@ -58,10 +63,23 @@ class SlapUser::AuthUserController < ApplicationController
         format.json{render json: {:result => 0, :info => @signup_user.errors}, status: 422 }
       end
     end
+  end
+
+  def social_create
+
+
+  #  request.env['omniauth.auth']
+    render :json => { :result => 1, :info =>     request.env['omniauth.auth']  }
 
   end
 
-  def signup_data
+  def social_failure
+    respond_to do |format|
+      format.json { render  json: { :result => 1,:info => request.env }}
+    end
+  end
+
+  def signup_destroy
     params.require(:slap_user).permit(:email,:username,:password,:password_confirmation)
   end
 
