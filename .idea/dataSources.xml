@@ -13,7 +13,7 @@
       <driver-ref>mysql</driver-ref>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://127.0.0.1/slap_test</jdbc-url>
-      <user-name>root</user-name>
+      <user-name>travis</user-name>
       <user-password>dfdedfcfdfd9dfde</user-password>
       <libraries />
     </data-source>
