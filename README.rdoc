@@ -1,3 +1,4 @@
+https://travis-ci.org/LinkedHK/RakeClass.svg?branch=master
 RakeClass Ruby on Rails powered web application.
 =======================
 
