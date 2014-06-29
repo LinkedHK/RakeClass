@@ -9,4 +9,4 @@ before_script:
   - mysql -e 'create database slap_test;'
 rvm:
   - 2.0.0
-script: rspec spec
+script: script: bundle exec rspec spec
