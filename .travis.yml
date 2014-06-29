@@ -1,2 +1,8 @@
 language: ruby
-script: 'true'
+cache: bundler
+before_install:
+  - gem update --system
+  - gem --version
+rvm:
+  - 2.0.0-p481
+script: rspec spec

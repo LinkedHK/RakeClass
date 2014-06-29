@@ -38,8 +38,9 @@ group :development do
   gem 'guard'
   gem 'guard-rspec'
   gem 'pry'
+  #gem 'cf'
 end
-gem 'cf'
+gem 'travis'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
