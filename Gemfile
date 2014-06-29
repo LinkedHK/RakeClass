@@ -5,16 +5,19 @@ source 'https://rubygems.org'
 gem 'rails', '4.1.1'
 # Use mysql as the database for Active Record
 gem 'mysql2'
-# Use SCSS for stylesheets
 
 
 gem 'activerecord-session_store'
+gem 'omniauth'
+gem 'omniauth-facebook'
 
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0'
   gem "factory_girl_rails", "~> 4.0"
   gem 'faker'
+
+
 end
 
 group :development do
@@ -26,11 +29,9 @@ group :development do
 end
 group :production,:development do
   #gem 'koala'
-  gem 'omniauth-facebook'
 # Use jquery as the JavaScript library
   gem 'jquery-rails'
 #gem 'koala'
-  gem 'omniauth-facebook'
 # Use jquery as the JavaScript library
   gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
