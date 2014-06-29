@@ -4,9 +4,9 @@ before_install:
   - gem update --system
   - gem --version
 script:
+    bundle exec rspec spec
   - RAILS_ENV=test bundle exec rake --trace db:migrate test
 before_script:
   - mysql -e 'create database slap_test;'
 rvm:
   - 2.0.0
-script: script: bundle exec rspec spec
