@@ -8,5 +8,6 @@ script:
   - bundle exec rake --trace db:migrate test
 before_script:
   - mysql -e 'create database slap_test;'
+  - echo "USE mysql;\nUPDATE user SET password=PASSWORD('test') WHERE user='root';\nFLUSH PRIVILEGES;\n" | mysql -u root
 rvm:
   - 2.0.0

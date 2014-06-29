@@ -28,7 +28,8 @@ test:
   <<: *default
   database: slap_test
   adapter: mysql2
-  username: travis
+  username: root
+  password: test
   ncoding: utf8
 
 # As with config/secrets.yml, you never want to store sensitive information,
