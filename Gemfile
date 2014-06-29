@@ -16,7 +16,7 @@ gem 'coffee-rails', '~> 4.0.0'
 
 gem 'activerecord-session_store'
 
-gem 'koala'
+#gem 'koala'
 gem 'omniauth-facebook'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -39,7 +39,7 @@ group :development do
   gem 'guard-rspec'
   gem 'pry'
 end
-
+gem 'cf'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

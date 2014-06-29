@@ -20,3 +20,78 @@
 .form-signin-heading{
     text-align: center;
 }
+
+/* Button*/
+.registerLoginButton {
+    border-radius: 3px;
+    float: none;
+    height: 45px;
+    margin: 0 auto 0;
+    padding: 0;
+    text-align: left;
+    width: 272px;
+}
+.unAuthFacebookConnect {
+    background-color: #3357b5;
+    background: -webkit-linear-gradient(#365cc3, #3052a8);
+    background: linear-gradient(#365cc3, #3052a8);
+    border: 1px solid #293f69;
+    margin-bottom: 10px !important;
+}
+.Button.btn.unAuthFacebookConnect {
+    background-color: #43609b;
+    background: -webkit-linear-gradient(#5678bc, #314a7b);
+    background: linear-gradient(#5678bc, #314a7b);
+    border: 1px solid #293f69;
+    border-top-color: #314a7b;
+    color: #444;
+    text-shadow: 0 1px #fff;
+}
+.Button.btn.unAuthFacebookConnect span, .Button.btn.unAuthGplusConnect span, .Button.btn.unAuthTwitterConnect span, .Button.btn.unAuthRakutenConnect span {
+    text-shadow: 0 -1px rgba(0, 0, 0, 0.25);
+    color: #fff;
+}
+.registerLoginButton .buttonText {
+    font-size: 15px;
+    margin-left: 60px;
+    margin-top: 0;
+}
+.Button.btn {
+    background-color: #f7f7f7;
+    background: -webkit-linear-gradient(#fff, #f0f0f0);
+    background: linear-gradient(#fff, #f0f0f0);
+    border: 1px solid #ccc;
+    color: #5f5f5f;
+    cursor: pointer;
+    font-weight: bold;
+    text-shadow: 0 1px #fff;
+    white-space: nowrap;
+    font-size: 12px;
+    background-color: #f0f0f0;
+    padding: 6px 12px;
+}
+.registerLoginButton
+em {
+    background-position: center !important;
+    box-shadow: none;
+    height: 100%;
+    width: 46px;
+
+}
+.registerLoginButton .buttonText {
+    font-size: 15px;
+    margin-left: 0px;
+    margin-top: 0;
+}
+
+
+.registerLoginButton em {
+    width: 34px;
+    height: 23px;
+    background: url('/assets/fb_login.png') 0px 0px no-repeat;
+    border-right: 2px solid #4a6ed0;
+    display: block;
+    position: relative;
+    float: left;
+}
+/* # Facebook Login Button*/

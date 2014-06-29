@@ -3,18 +3,14 @@ module UserAuth
   module ClassMethods
     def auth_by_email(email,password)
       user = SlapLogin.where(email: email).select(:id,:email,:password).limit(1)
-      if user.blank? == false
+      unless user.blank?
         user  = user.last
         if user[:password] == Digest::SHA2.hexdigest(password)
-          user
-        else
-          nil
+         return user
         end
-      else
-        nil
       end
+      nil
     end
-
   end
 
 end

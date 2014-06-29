@@ -11,6 +11,7 @@ module Concerns
               session[:tmp_session] = 0
             end
           end
+
           def has_id
              session.has_key?("user_id")
           end

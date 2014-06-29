@@ -1,6 +1,4 @@
 module PaginationHelper
-
-
 def create_pagination(col_length,page,limit)
    page  < 1 ? page = 1 : page
 

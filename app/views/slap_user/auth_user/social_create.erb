@@ -1,0 +1,13 @@
+<% if @user.errors.any? %>
+    <script type="text/javascript">
+        window.close();
+        window.opener.default_error();
+    </script>
+    <% else%>
+    <script type="text/javascript">
+        window.close();
+        window.opener.location = '<%= @red %>';
+    </script>
+
+<% end%>
+

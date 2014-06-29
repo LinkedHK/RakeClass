@@ -1,6 +1,4 @@
 FactoryGirl.define do
-
-
   factory :slap_user do
     username "test"
     email "test@example.com"

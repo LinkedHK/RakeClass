@@ -1,5 +1,5 @@
 class SlapUser::AuthUserController < ApplicationController
-  before_action :check_auth, only: [:login,:post_login,:signup,:post_signup]
+  before_action :check_auth, only: [:login,:post_login,:signup,:post_signup,:social_create]
  #before_action :resolve_fb_user, only: [:login]
   def resolve_fb_user
     end
@@ -65,18 +65,38 @@ class SlapUser::AuthUserController < ApplicationController
     end
   end
 
-  def social_create
+  def result_sign
 
-
+  end
+  def facebook_login
   #  request.env['omniauth.auth']
-    render :json => { :result => 1, :info =>     request.env['omniauth.auth']  }
+    @red = '/'
+    @user = SlapUser.from_omniauth(request.env['omniauth.auth'])
+
+
+=begin
+
+    id_user =  SlapUser.check_uid(@user.uid)
+
+      if id_user.blank?
+        if user.save
+          user = SlapUser.order("created_at").last(1)
+          set_user_session(user.last)
+        end
+
+      else
+       #  else User with specified uid exists
+        set_user_session({:id => id_user[0].uid})
+      end
+=end
+     render :social_create
 
   end
 
   def social_failure
-    respond_to do |format|
-      format.json { render  json: { :result => 1,:info => request.env }}
-    end
+    message_key = env['omniauth.error.type']
+    new_path = "#{env['SCRIPT_NAME']}#{OmniAuth.config.path_prefix}/failure?message=#{message_key}"
+    Rack::Response.new(["302 Moved"], 302, 'Location' => new_path).finish
   end
 
   def signup_destroy
@@ -85,6 +105,9 @@ class SlapUser::AuthUserController < ApplicationController
 
   def login_data
     params.require(:slap_login).permit(:email,:password)
+  end
+  def signup_data
+    params.require(:slap_user).permit(:email,:username,:password,:password_confirmation)
   end
 
 

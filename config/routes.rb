@@ -37,11 +37,10 @@ Rails.application.routes.draw do
       get '/signup' , to: 'auth_user#signup', as: 'auth_user_signup'
       post '/signup' , to: 'auth_user#post_signup', as: 'auth_post_signup'
       get '/logout' , to: 'auth_user#logout', as: 'auth_user_logout'
-
-    match '/logout', to: 'auth_user#social_destroy', via: [:get, :post]
     end
-  match '/auth/:provider/callback', to: 'slap_user/auth_user#social_create', via: [:get, :post]
-
+  match '/auth/facebook/callback', to: 'slap_user/auth_user#facebook_login', via: [:get, :post]
+  match '/auth/logout', to: 'slap_user/auth_user#social_destroy', via: [:get, :post]
+  match ' /auth/failure', to: 'slap_user/auth_user#social_failure',via: [:get, :post]
 
   # match '/auth/:provider/callback', to: 'auth_user#social_create', via: [:get, :post]
 

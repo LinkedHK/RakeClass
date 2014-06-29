@@ -27,13 +27,48 @@
         <%= f.password_field  :password ,{:class => "form-control",:maxlength => 255,:require  => "require"}%>
       </div>
       <div class="form-group">
-        <%= f.submit(t(:user_auth_sign_up_text_submit),{:class =>"btn btn-lg btn-primary btn-block", :name => "sign_in"})%>
+        <%= f.submit(t(:user_auth_sign_in_text_submit),{:class =>"btn btn-lg btn-primary btn-block", :name => "sign_in"})%>
       </div>
       <div class="form-group">
         <label>Login with: </label>
-        <%= render 'fb_auth' %>
+        <p>
+          <button id="facebook_login_button" type="button" class="rounded Button Module large hasText btn unAuthFacebookConnect registerLoginButton">
+            <em></em>
+            <span class="buttonText">Continue with Facebook</span>
+          </button>
+        </p>
+
       </div>
   <% end %>
+
+  <script>
+      (function(){
+          $("#facebook_login_button").on('click',function(){
+             return  draw_login('/auth/facebook',window.innerWidth/1.6,window.innerHeight/1.6);
+           //   window.open('/auth/facebook', "Login with facebook " + Math.random(), windowSize);
+          });
+
+      }(jQuery));
+      var newwindow;
+      function draw_login(provider_url, width, height) {
+          var screenX     = typeof window.screenX != 'undefined' ? window.screenX : window.screenLeft,
+                  screenY     = typeof window.screenY != 'undefined' ? window.screenY : window.screenTop,
+                  outerWidth  = typeof window.outerWidth != 'undefined' ? window.outerWidth : document.body.clientWidth,
+                  outerHeight = typeof window.outerHeight != 'undefined' ? window.outerHeight : (document.body.clientHeight - 22),
+                  left        = parseInt(screenX + ((outerWidth - width) / 2), 10),
+                  top         = parseInt(screenY + ((outerHeight - height) / 2.5), 10),
+                  features    = ('width=' + width + ',height=' + height + ',left=' + left + ',top=' + top);
+
+          newwindow = window.open(provider_url, 'Login ' + Math.random(), features);
+          if (window.focus)
+              newwindow.focus();
+
+          return false;
+      }
+      function default_error(){
+          alert("Unfortunately we were unable to authenticate you. Try again.")
+      }
+  </script>
 
 </div>
 

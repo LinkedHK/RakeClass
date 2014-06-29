@@ -105,6 +105,19 @@ RSpec.describe SlapUser::AuthUserController, :type => :controller do
       expect(response).to have_http_status(422)
       expect(resp['result']).to eq(0)
     end
+  end
+
+  context "Facebook auth provider" do
+     before(:each) do
+       request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:facebook]
+     end
+
+    it 'accessibility  facebook auth' do
+      get :facebook_login,request.env["omniauth.auth"]
+      expect(response).to have_http_status(200)
+    end
+
+
 
   end
 
