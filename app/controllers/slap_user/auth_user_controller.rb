@@ -78,7 +78,7 @@ class SlapUser::AuthUserController < ApplicationController
           user = SlapUser.order("created_at").last(1)
           set_user_session(user.last)
         else
-          return render :social_create,@user.errors
+          return render :social_create
         end
       else
         #  else User with specified uid exists
