@@ -21,15 +21,13 @@ module Concerns
           user.oauth_expires_at = Time.at(auth.credentials.expires_at)
           return user
         end
-
-        def check_uid(uid)
-          result = SlapUser.where(:uid => uid).select(:uid,:id).limit(1)
-        end
-        def check_email(email)
-          result = SlapUser.where(:email => email).select(:email).limit(1)
-        end
       end
-
+      def check_uid(uid)
+        result = SlapUser.where(:uid => uid).select(:uid,:id).limit(1)
+      end
+      def check_email(email)
+        result = SlapUser.where(:email => email).select(:email).limit(1)
+      end
     end
   end
 end

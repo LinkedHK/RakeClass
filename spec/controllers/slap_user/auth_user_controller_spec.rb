@@ -110,13 +110,22 @@ RSpec.describe SlapUser::AuthUserController, :type => :controller do
   context "Facebook auth provider" do
      before(:each) do
        request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:facebook]
+       #FactoryGirl.create(:omni_facebook)
      end
-
     it 'accessibility  facebook auth' do
-      get :facebook_login,request.env["omniauth.auth"]
+      expect{
+        get :facebook_login,request.env["omniauth.auth"]
+      }.to change(SlapUser,:count).by(1)
       expect(response).to have_http_status(200)
     end
 
+     it 'User used email' do
+       FactoryGirl.create(:omni_facebook_used_email)
+       expect{
+         get :facebook_login,request.env["omniauth.auth"]
+       }.to change(SlapUser,:count).by(0)
+       expect(response).to have_http_status(422)
+     end
 
 
   end

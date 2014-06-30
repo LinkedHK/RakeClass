@@ -72,25 +72,19 @@ class SlapUser::AuthUserController < ApplicationController
   #  request.env['omniauth.auth']
     @red = '/'
     @user = SlapUser.from_omniauth(request.env['omniauth.auth'])
-
-
-=begin
-
     id_user =  SlapUser.check_uid(@user.uid)
-
       if id_user.blank?
-        if user.save
+        if @user.save
           user = SlapUser.order("created_at").last(1)
           set_user_session(user.last)
+        else
+          return render :social_create,@user.errors
         end
-
       else
-       #  else User with specified uid exists
+        #  else User with specified uid exists
         set_user_session({:id => id_user[0].uid})
       end
-=end
      render :social_create
-
   end
 
   def social_failure
