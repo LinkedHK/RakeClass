@@ -1,3 +1,13 @@
+GIT
+  remote: git://github.com/thoughtbot/paperclip.git
+  revision: a424b82daed0247d5926ddbff14dffb8553b1695
+  specs:
+    paperclip (4.1.1)
+      activemodel (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      cocaine (~> 0.5.3)
+      mime-types
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -37,6 +47,10 @@ GEM
     builder (3.2.2)
     celluloid (0.15.2)
       timers (~> 1.1.0)
+    climate_control (0.0.3)
+      activesupport (>= 3.0)
+    cocaine (0.5.4)
+      climate_control (>= 0.0.3, < 1.0)
     coderay (1.1.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -61,6 +75,7 @@ GEM
       multipart-post (>= 1.2, < 3)
     faraday_middleware (0.9.1)
       faraday (>= 0.7.4, < 0.10)
+    ffi (1.9.3)
     ffi (1.9.3-x64-mingw32)
     formatador (0.2.5)
     gh (0.13.2)
@@ -128,6 +143,10 @@ GEM
       oauth2 (~> 0.9.3)
       omniauth (~> 1.2)
     polyglot (0.3.5)
+    pry (0.10.0)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
     pry (0.10.0-x64-mingw32)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -252,6 +271,7 @@ DEPENDENCIES
   mysql2
   omniauth
   omniauth-facebook
+  paperclip!
   pry
   rails (= 4.1.1)
   rspec-rails (~> 3.0.0)

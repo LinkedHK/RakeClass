@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe SlapUser::AuthUserController, :type => :controller do
+
   describe "Pages accessibility" do
     it "accessibility login page" do
       get :login
@@ -17,7 +18,7 @@ RSpec.describe SlapUser::AuthUserController, :type => :controller do
         user_attributes =  FactoryGirl.build(:slap_user).attributes
         expect{
           post :post_signup, {slap_user: user_attributes }
-        }.to change(SlapUser,:count).by(1)
+        }.to change(User::SlapUser,:count).by(1)
         assigns(session[:id])
         expect(response).to redirect_to root_url
         expect(session[:user_id]).not_to be_nil
@@ -26,7 +27,7 @@ RSpec.describe SlapUser::AuthUserController, :type => :controller do
         user_attributes =  FactoryGirl.build(:invalid_slap_user).attributes
         expect{
           post :post_signup, {slap_user: user_attributes }
-        }.to change(SlapUser,:count).by(0)
+        }.to change(User::SlapUser,:count).by(0)
         expect render_template :signup
       end
     end
@@ -115,7 +116,7 @@ RSpec.describe SlapUser::AuthUserController, :type => :controller do
     it 'accessibility  facebook auth' do
       expect{
         get :facebook_login,request.env["omniauth.auth"]
-      }.to change(SlapUser,:count).by(1)
+      }.to change(User::SlapUser,:count).by(1)
       expect(response).to have_http_status(200)
     end
 
@@ -123,7 +124,7 @@ RSpec.describe SlapUser::AuthUserController, :type => :controller do
        FactoryGirl.create(:omni_facebook_used_email)
        expect{
          get :facebook_login,request.env["omniauth.auth"]
-       }.to change(SlapUser,:count).by(0)
+       }.to change(User::SlapUser,:count).by(0)
      end
   end
 

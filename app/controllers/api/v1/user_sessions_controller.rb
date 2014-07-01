@@ -1,5 +1,5 @@
 class Api::V1::UserSessionsController < ApplicationController
-
+   include User
   protect_from_forgery with: :null_session, :if => Proc.new { |c| c.request.format == 'application/vnd.slap.v1' }
 
   # Post /usr/rest/v1/login

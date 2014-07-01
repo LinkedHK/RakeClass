@@ -1,6 +1,8 @@
 module UserAuth
   extend ActiveSupport::Concern
+
   module ClassMethods
+    include User
     def auth_by_email(email,password)
       user = SlapLogin.where(email: email).select(:id,:email,:password).limit(1)
       unless user.blank?

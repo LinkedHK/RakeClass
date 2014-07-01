@@ -10,6 +10,7 @@ gem 'mysql2'
 gem 'activerecord-session_store'
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 
 
 group :development, :test do

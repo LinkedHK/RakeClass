@@ -1,5 +1,6 @@
 module Concerns
   module SlapUserMain
+
     extend ActiveSupport::Concern
       def encrypt_password
         self.password = Digest::SHA2.hexdigest(self.password)
@@ -9,6 +10,7 @@ module Concerns
         saved_user = SlapUser.order("created_at").last(1)
       end
     module ClassMethods
+      include User
       def from_omniauth(auth)
         where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
           user.via_ouath = true

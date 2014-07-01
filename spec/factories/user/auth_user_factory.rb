@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :slap_user do
+  factory :slap_user, :class => User::SlapUser do
     username "test"
     email "test@example.com"
     password "secret"
@@ -37,13 +37,9 @@ FactoryGirl.define do
       email 'joe@bloggs.com'
       oauth_token 'CAAVQqMmajdwBANSje594N6WI1b2ZCYs9Ym3WA6pSc2mhC1lgsyj4gqWnXC1T1ZC4ZBtZBAji6TsjnZCDDw0YZAgZCHGrJbSZBg7NOhxbsJz9FCPrNk4sLvSoBM5O56Q6XEqoYeU0z4AECxWSiS6nxsiGUZAeLUvg9x6HXRyc8pBb9ZCr1YdCnjHSZAY'
       oauth_expires_at Time.now + 5.days
-
       factory :omni_facebook_used_email  do
         uid 1234510
       end
     end
-
-
-
   end
 end

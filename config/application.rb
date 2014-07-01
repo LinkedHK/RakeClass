@@ -6,7 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-
+Paperclip.options[:command_path] = "C:\Program Files\ImageMagick-6.8.9-Q16"
 #OmniAuth.config.test_mode = true
 
 OmniAuth.config.add_mock(:facebook,

@@ -1,5 +1,7 @@
+
 class SlapUser::AuthUserController < ApplicationController
   before_action :check_auth, only: [:login,:post_login,:signup,:post_signup,:social_create]
+  include User
  #before_action :resolve_fb_user, only: [:login]
   def resolve_fb_user
     end

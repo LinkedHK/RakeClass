@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140628133355) do
+ActiveRecord::Schema.define(version: 20140701171954) do
 
   create_table "sessions", force: true do |t|
     t.string   "session_id", null: false
@@ -57,5 +57,17 @@ ActiveRecord::Schema.define(version: 20140628133355) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "user_images", force: true do |t|
+    t.integer  "slap_user_id"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_images", ["created_at"], name: "index_user_images_on_created_at", using: :btree
 
 end

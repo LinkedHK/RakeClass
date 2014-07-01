@@ -1,7 +1,7 @@
 require 'rspec'
 require 'rails_helper'
 
-describe SlapUser do
+describe User::SlapUser do
   describe "creation" do
     context "Valid attributes" do
       it "should be valid"  do
