@@ -13,19 +13,20 @@ gem 'omniauth-facebook'
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 
 
-group :development, :test do
+group :test do
   gem 'rspec-rails', '~> 3.0.0'
   gem "factory_girl_rails", "~> 4.0"
   gem 'faker'
-
-
+  gem 'codeclimate-test-reporter'
+  #gem 'travis'
 end
+
 
 group :development do
   gem 'guard'
   gem 'guard-rspec'
   gem 'pry'
-  gem 'travis'
+
   #gem 'cf'
 end
 group :production,:development do

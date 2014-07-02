@@ -15,11 +15,17 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 # Checks for pending migrations before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
+require "codeclimate-test-reporter"
+CodeClimate::TestReporter.start
 ActiveRecord::Migration.maintain_test_schema!
 
+require 'paperclip/matchers'
+
 RSpec.configure do |config|
+  config.include Paperclip::Shoulda::Matchers
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
+
 
   config.include Requests::JsonHelpers
 
