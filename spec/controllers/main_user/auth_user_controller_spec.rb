@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe AuthUserController, :type => :controller do
+RSpec.describe MainUser::AuthUserController, :type => :controller do
 
   describe "Pages accessibility" do
     it "accessibility login page" do

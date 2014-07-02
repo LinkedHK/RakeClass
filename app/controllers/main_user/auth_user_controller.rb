@@ -1,5 +1,4 @@
-
-class AuthUserController < ApplicationController
+class MainUser::AuthUserController < ApplicationController
   before_action :check_auth, only: [:login,:post_login,:signup,:post_signup,:social_create]
  #before_action :resolve_fb_user, only: [:login]
   def check_auth

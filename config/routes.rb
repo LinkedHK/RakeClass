@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   post 'slap_items/operation/create', to: 'slap_items#create', as: 'slap_item_create'
 
 
-    scope "/usr" do
+    scope "/usr" ,module: :main_user do
       get '/' , to: 'auth_user#index', as: 'auth_user_index'
       get '/login' , to: 'auth_user#login', as: 'auth_user_login'
       post '/login' , to: 'auth_user#post_login', as: 'auth_post_login'
@@ -38,9 +38,9 @@ Rails.application.routes.draw do
       post '/signup' , to: 'auth_user#post_signup', as: 'auth_post_signup'
       get '/logout' , to: 'auth_user#logout', as: 'auth_user_logout'
     end
-  match '/auth/facebook/callback', to: 'auth_user#facebook_login', via: [:get, :post]
-  match '/auth/logout', to: 'auth_user#social_destroy', via: [:get, :post]
-  match ' /auth/failure', to: 'auth_user#social_failure',via: [:get, :post]
+  match '/auth/facebook/callback', to: 'main_user/auth_user#facebook_login', via: [:get, :post]
+  match '/auth/logout', to: 'main_user/auth_user#social_destroy', via: [:get, :post]
+  match ' /auth/failure', to: 'main_user/auth_user#social_failure',via: [:get, :post]
 
   # match '/auth/:provider/callback', to: 'auth_user#social_create', via: [:get, :post]
 
