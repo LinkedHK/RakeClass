@@ -1,5 +1,5 @@
 #require 'rails_helper'
-describe User::UserImages do
+describe UserImages do
   context  'Basic validation of uploaded images' do
     it 'Expect to have an attached file' do
       expect have_attached_file(:avatar)

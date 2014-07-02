@@ -81,7 +81,7 @@ module Slap
   config.autoload_paths += %W(
     #{config.root}/app/controllers/concerns
     )
-    config.autoload_paths +=  Dir["#{config.root}/app/models/concerns/**/","#{config.root}/lib/**/"]
+    config.autoload_paths +=  Dir["#{config.root}/app/models/concerns/**/","#{config.root}/app/models/user/**/","#{config.root}/lib/**/"]
 
     config.facebook_app_id  = '1496060750630364'
     config.facebook_secret_app_id = 'd6b3f4bfca4f4c4a6b438ed47342398c'

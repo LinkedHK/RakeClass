@@ -1,10 +1,10 @@
-module User
+
   require 'digest/sha1'
   class SlapUser < ActiveRecord::Base
     include ValidationFields
     include Concerns::SlapUserMain
     attr_accessor :via_ouath
-    has_many :user_user_imageses, :class_name => 'User::UserImages'
+    has_many :user_user_imageses, :class_name => 'UserImages'
 
 =begin
     has_attached_file :profile_image, :styles => { :medium => "300x300>", :thumb => "120x120>" },
@@ -25,9 +25,5 @@ module User
     validates_length_of :last_name, :maximum => 20
     validates_length_of :first_name, :maximum => 20
   end
-
-
-
-end
 
 

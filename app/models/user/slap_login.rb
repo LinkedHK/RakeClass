@@ -1,4 +1,4 @@
-module User
+
   class SlapLogin < ActiveRecord::Base
     include ValidationFields
     include UserAuth
@@ -10,4 +10,3 @@ module User
 
     attr_accessor :email,:password
   end
-end

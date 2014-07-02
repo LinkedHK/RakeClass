@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :slap_user, :class => User::SlapUser do
+  factory :slap_user, :class => SlapUser do
     username "test"
     email "test@example.com"
     password "secret"

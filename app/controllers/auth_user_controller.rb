@@ -1,11 +1,7 @@
 
-class SlapUser::AuthUserController < ApplicationController
+class AuthUserController < ApplicationController
   before_action :check_auth, only: [:login,:post_login,:signup,:post_signup,:social_create]
-  include User
  #before_action :resolve_fb_user, only: [:login]
-  def resolve_fb_user
-    end
-
   def check_auth
     if has_id
       redirect_to :slap_index
@@ -100,6 +96,4 @@ class SlapUser::AuthUserController < ApplicationController
   def signup_data
     params.require(:slap_user).permit(:email,:username,:password,:password_confirmation)
   end
-
-
 end
