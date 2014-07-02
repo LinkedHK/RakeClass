@@ -29,23 +29,18 @@ class SlapUser::AuthUserController < ApplicationController
 
   def post_login
     @login_user = SlapLogin.new(login_data)
-    respond_to do |format|
-    if @login_user.valid?
-      user = SlapLogin.auth_by_email(params[:slap_login][:email],params[:slap_login][:password])
-      if user
-        set_user_session(user)
-          format.html { redirect_to :slap_index, notice:  t(:successful_login) }
-          format.json { render json: {:result => 1, :info => t(:successful_login)},status: 200 }
-      else
-        flash[:notice] = t(:login_failure)
-          format.html { render  :action =>  :login}
-          format.json { render json: {:result => 0, :info => t(:login_failure)},status: 422}
+      respond_to do |format|
+      if @login_user.valid?
+        user = SlapLogin.auth_by_email(params[:slap_login][:email],params[:slap_login][:password])
+        if user
+          set_user_session(user)
+            format.html { redirect_to :slap_index, notice:  t(:successful_login) }
+            format.json { render json: {:result => 1, :info => t(:successful_login)},status: 200 }
+        end
       end
-    else
-        format.html{render :action => :login }
-        format.json{render json: {:result => 0, :info => t(:login_failure)},status: 422,:action => :login }
-    end
-  end
+      format.html{render :action => :login }
+      format.json{render json: {:result => 0, :info => t(:login_failure)},status: 422,:action => :login }
+      end
   end
   # Get /usr/signup
   def signup

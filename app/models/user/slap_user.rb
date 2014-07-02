@@ -5,6 +5,7 @@ module User
     include Concerns::SlapUserMain
     attr_accessor :via_ouath
     has_many :user_user_imageses, :class_name => 'User::UserImages'
+
 =begin
     has_attached_file :profile_image, :styles => { :medium => "300x300>", :thumb => "120x120>" },
                       :default_url => "/images/profile/:style/missing.png" ,
