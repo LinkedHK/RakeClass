@@ -4,6 +4,7 @@ before_install:
   #- gem update --system
   - gem --version
 script:
+  - CODECLIMATE_REPO_TOKEN=02149c8c8c18bb978851acf1df4de0117ccaa025eb80e074425b5de739ab7654
   - bundle exec rspec spec
   - bundle exec rake --trace db:migrate test
 before_script:
