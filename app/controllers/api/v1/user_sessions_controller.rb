@@ -1,12 +1,11 @@
 class Api::V1::UserSessionsController < ApplicationController
    include User
   protect_from_forgery with: :null_session, :if => Proc.new { |c| c.request.format == 'application/vnd.slap.v1' }
-
   # Post /usr/rest/v1/login
   def post_login
     @login_user = SlapLogin.new(login_data)
     if @login_user.valid?
-      user = SlapLogin.auth_by_email(@login_user.email,@login_user.password)
+      user = SlapUser.auth_by_email(@login_user.email,@login_user.password)
       if user
         set_user_session(user)
         return render :json => { :result => 1, :info => t(:successful_login), :session_id => cookies['sessionsid'], :status => 200}

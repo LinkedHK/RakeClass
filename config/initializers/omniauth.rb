@@ -5,7 +5,9 @@ Rails.application.config.middleware.use OmniAuth::Builder do
            :scope => 'email',
            :display => 'popup',
            :image_size => 'large',
+           :secure_image_url => true,
            :info_fields => 'id,first_name,last_name,email',
            :provider_ignores_state => true
+
 
 end

@@ -7,7 +7,6 @@ class MainUser::AuthUserController < ApplicationController
     end
   end
   def login
-   # @fb = Koala::Facebook::OAuth.new(Rails.application.config.facebook_app_id, Rails.application.config.facebook_secret_app_id)
     @login_user = SlapLogin.new
   end
 
@@ -26,7 +25,7 @@ class MainUser::AuthUserController < ApplicationController
     @login_user = SlapLogin.new(login_data)
       respond_to do |format|
       if @login_user.valid?
-        user = SlapLogin.auth_by_email(params[:slap_login][:email],params[:slap_login][:password])
+        user = SlapUser.auth_by_email(params[:slap_login][:email],params[:slap_login][:password])
         if user
           set_user_session(user)
             format.html { redirect_to :slap_index, notice:  t(:successful_login) }
@@ -61,20 +60,22 @@ class MainUser::AuthUserController < ApplicationController
 
   end
   def facebook_login
-  #  request.env['omniauth.auth']
-    @red = '/'
-    @user = SlapUser.from_omniauth(request.env['omniauth.auth'])
-    id_user =  SlapUser.check_uid(@user.uid)
-      if id_user.blank?
+    @red = url_for(return_user_url)
+    auth =request.env['omniauth.auth']
+    @user = SlapUser.build_profile_omniauth(auth)
+    user_id = SlapUser.check_uid(@user.uid)
+      if user_id.blank?
         if @user.save
-          user = SlapUser.order("created_at").last(1)
-          set_user_session(user.last)
+         img = SlapUser.avatar_from_url(@user,auth.info.image)
+         if img.save
+           set_user_session({:id => @user.id})
+         end
         else
           return render :social_create
         end
       else
         #  else User with specified uid exists
-        set_user_session({:id => id_user[0].uid})
+        set_user_session(user_id)
       end
      render :social_create
   end
@@ -92,6 +93,7 @@ class MainUser::AuthUserController < ApplicationController
   def login_data
     params.require(:slap_login).permit(:email,:password)
   end
+
   def signup_data
     params.require(:slap_user).permit(:email,:username,:password,:password_confirmation)
   end

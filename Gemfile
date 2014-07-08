@@ -9,6 +9,7 @@ gem 'mysql2'
 
 gem 'activerecord-session_store'
 gem 'omniauth'
+#gem 'open_uri_redirections'
 gem 'omniauth-facebook'
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 

@@ -1,5 +1,4 @@
 <div class="sign_form_wrapper container">
-
   <%= form_for(@login_user,:url => auth_post_login_path,:role => "form") do |f| %>
       <h2 class="form-signin-heading"><%= t(:user_auth_signin_heading)%></h2>
       <% if @login_user.errors.any? %>

@@ -1,7 +1,5 @@
-
   class SlapLogin < ActiveRecord::Base
     include ValidationFields
-    include UserAuth
 
     self.table_name = 'slap_users'
 

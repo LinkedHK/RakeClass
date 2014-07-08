@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   include Concerns::UserSession
+  include Concerns::Http::RequestPlugin
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
@@ -18,6 +19,8 @@ class ApplicationController < ActionController::Base
       format.json { render json: response, status: :unprocessable_entity }
     end
   end
+
+  helper_method :has_id
 
 
 

@@ -31,12 +31,17 @@ Rails.application.routes.draw do
 
 
     scope "/usr" ,module: :main_user do
+      ## AuthUserController
       get '/' , to: 'auth_user#index', as: 'auth_user_index'
       get '/login' , to: 'auth_user#login', as: 'auth_user_login'
       post '/login' , to: 'auth_user#post_login', as: 'auth_post_login'
       get '/signup' , to: 'auth_user#signup', as: 'auth_user_signup'
       post '/signup' , to: 'auth_user#post_signup', as: 'auth_post_signup'
       get '/logout' , to: 'auth_user#logout', as: 'auth_user_logout'
+
+    ## UserProfile controller
+      get '/profile',to: 'user_profile#index', as: 'user_profile_index'
+      post '/profile',to: 'user_profile_update#update_profile', as: 'user_profile_update'
     end
   match '/auth/facebook/callback', to: 'main_user/auth_user#facebook_login', via: [:get, :post]
   match '/auth/logout', to: 'main_user/auth_user#social_destroy', via: [:get, :post]

@@ -94,4 +94,9 @@ em {
     position: relative;
     float: left;
 }
+
 /* # Facebook Login Button*/
+.profile_form_wrapper{
+    margin-top: 100px;
+}
+

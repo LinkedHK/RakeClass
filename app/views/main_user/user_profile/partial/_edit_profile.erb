@@ -1,0 +1,24 @@
+<%= form_for(@user,:url => user_profile_update_path,method: :post  ) do |u| %>
+    <% if @user.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@user.errors.count, 'error') %> prohibited this status from being saved:</h2>
+          <ul>
+            <% @user.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <div class="form-group">
+      <%= image_tag @img.avatar.url %>
+    </div>
+    <div class="form-group">
+      <%= u.text_field :first_name,{:class => "form-control",:maxlength => 255,:require  => "require"} %>
+    </div>
+    <div class="form-group">
+      <%= u.text_field :last_name,{:class => "form-control",:maxlength => 255,:require  => "require"} %>
+    </div>
+    <div class="form-group">
+      <%= u.submit %>
+    </div>
+<% end %>
