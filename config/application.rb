@@ -18,7 +18,7 @@ OmniAuth.config.add_mock(:facebook,
                              :name => 'Joe Bloggs',
                              :first_name => 'Joe',
                              :last_name => 'Bloggs',
-                             :image => 'http://graph.facebook.com/1234567/picture?type=square',
+                             :image => 'https://graph.facebook.com/1234567/picture?type=square',
                              :urls => { :Facebook => 'http://www.facebook.com/jbloggs' },
                              :location => 'Palo Alto, California',
                              :verified => true

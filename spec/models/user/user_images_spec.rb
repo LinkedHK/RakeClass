@@ -16,6 +16,8 @@ describe UserImages do
       expect validate_attachment_size(:avatar)
       .less_than(5.megabytes)
     end
+
+
   end
 
 end
