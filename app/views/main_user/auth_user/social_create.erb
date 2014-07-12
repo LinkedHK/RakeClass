@@ -1,4 +1,4 @@
-<% if @user.errors.any? %>
+<% if @error %>
     <script type="text/javascript">
         window.close();
         window.opener.default_error();
@@ -8,6 +8,5 @@
         window.close();
         window.opener.location = '<%= @red %>';
     </script>
-
 <% end%>
 

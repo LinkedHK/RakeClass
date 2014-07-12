@@ -5,6 +5,13 @@ FactoryGirl.define do
     password "secret"
     password_confirmation "secret"
 
+    factory :user_with_profile_image do
+      after(:create) do |slap_user|
+           FactoryGirl.create(:profile_image,imageable: slap_user)
+      end
+    end
+
+
     factory :invalid_slap_user do
       username  ""
       email "test@example.com"

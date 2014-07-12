@@ -41,11 +41,13 @@ Rails.application.routes.draw do
 
     ## UserProfile controller
       get '/profile',to: 'user_profile#index', as: 'user_profile_index'
-      post '/profile',to: 'user_profile_update#update_profile', as: 'user_profile_update'
+      post '/profile',to: 'user_profile#update_profile', as: 'user_profile_update'
+      post '/profile/update_image',to: 'user_profile#update_image', as: 'user_profile_update_image'
+
     end
-  match '/auth/facebook/callback', to: 'main_user/auth_user#facebook_login', via: [:get, :post]
-  match '/auth/logout', to: 'main_user/auth_user#social_destroy', via: [:get, :post]
-  match ' /auth/failure', to: 'main_user/auth_user#social_failure',via: [:get, :post]
+    match '/auth/facebook/callback', to: 'main_user/auth_user#facebook_login', via: [:get, :post]
+    match '/auth/logout', to: 'main_user/auth_user#social_destroy', via: [:get, :post]
+    match ' /auth/failure', to: 'main_user/auth_user#social_failure',via: [:get, :post]
 
   # match '/auth/:provider/callback', to: 'auth_user#social_create', via: [:get, :post]
 

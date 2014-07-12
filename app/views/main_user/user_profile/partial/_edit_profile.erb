@@ -10,7 +10,8 @@
         </div>
     <% end %>
     <div class="form-group">
-      <%= image_tag @img.avatar.url %>
+
+      <%= image_tag @img.avatar.url(:thumb),{:class => 'img-rounded'} %>
     </div>
     <div class="form-group">
       <%= u.text_field :first_name,{:class => "form-control",:maxlength => 255,:require  => "require"} %>
@@ -22,3 +23,4 @@
       <%= u.submit %>
     </div>
 <% end %>
+<%= render 'main_user/user_profile/partial/profile_image_uploader' %>

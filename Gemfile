@@ -27,6 +27,7 @@ group :development do
   gem 'guard'
   gem 'guard-rspec'
   gem 'pry'
+  gem 'colorize'
 
   #gem 'cf'
 end
@@ -34,6 +35,7 @@ group :production,:development do
   #gem 'koala'
 # Use jquery as the JavaScript library
   gem 'jquery-rails'
+  #gem 'mobylette'
 #gem 'koala'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks

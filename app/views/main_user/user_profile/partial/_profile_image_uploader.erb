@@ -1,0 +1,154 @@
+<!-- Small modal -->
+<button class="btn btn-primary" data-toggle="modal" data-target="#profile_image_uploader">Large modal</button>
+
+<div id="profile_image_uploader" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="mySmallModalLabel">Small modal</h4>
+      </div>
+      <div id="profile_image_uploader_block" class="form-group">
+        <div class="current_profile_image">
+            <%= image_tag @img.avatar.url(:medium) %>
+        </div>
+        <%= form_for @img, :url => user_profile_update_image_path, :html => { :multipart => true,:id => "image_form" } do |form| %>
+            <div class="form-control file_input">
+              <%= form.file_field(:avatar,{:id =>  "input_image"}) %>
+            </div>
+            <div class="form-control image_upload_button">
+              <%= form.button("Upload",{:id => "submit_image",:class => "btn btn-primary"}) %>
+              <span id="upload_assert"></span>
+            </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    $(function(){
+        var UploadHandler = function(image_form){
+
+            this.$image_form = $(image_form);
+            this.$submit_button= $("#submit_image");
+            this.$upload_assert = $("#upload_assert");
+            this.$input_image = $("#input_image");
+            this.$user_avatar = $("#user_avatar");
+            this.max_size = 5242880;// Max upload size 5Mb.
+            this.sup_formats = new RegExp('(image/png|image/jpeg|image/gif)');
+
+            this.InitListeners();
+        };
+        UploadHandler.prototype.InitListeners = function(){
+
+            var self = this;
+            this.$input_image.on('change',function(){
+                self.OnValidate(this);
+            });
+
+            this.$submit_button.on('click',function(e){
+                e.preventDefault();
+                self.OnSubmit();
+            });
+        };
+
+        UploadHandler.prototype.OnValidate = function(input){
+            var self = this;
+            if(input.files && input.files[0]){
+                var files = input.files[0];
+                if(!self.sup_formats.test(files.type)){
+                    return self.stopProcess("The image file has invalid format.");
+                }else if(files.size > self.max_size){
+                    return self.stopProcess("The image file exceeds max size.");
+                }
+                self.AllowSubmit();
+            }else{
+                self.stopProcess("");
+            }
+        };
+        UploadHandler.prototype.stopProcess = function(message){
+            this.ErrorHelper(message);
+            this.$submit_button.prop('disabled',true);
+        };
+        UploadHandler.prototype.AllowSubmit = function(){
+            this.$submit_button.prop('disabled',false);
+            this.$upload_assert.text("");
+        };
+
+        UploadHandler.prototype.ErrorHelper = function(message){
+            this.$upload_assert.css("color","red").text(message)
+        };
+        UploadHandler.prototype.SuccessHelper = function(message){
+            this.$upload_assert.css("color","green").text(message)
+        };
+        UploadHandler.prototype.OnSuccess = function(response){
+
+            if(response.result == 1){
+                this.$user_avatar.attr("src",response.image_url);
+                this.$input_image.val("");
+                this.SuccessHelper("done");
+            }else if(response.error == 1){
+                alert(response.message);
+                this.$input_image.val("");
+                this.stopProcess("");
+            }
+        };
+
+        UploadHandler.prototype.resetButton = function(){
+            var self = this;
+            self.$submit_button.prop('disabled',false);
+            self.$upload_assert.text("");
+        } ;
+
+
+        UploadHandler.prototype.OnSubmit = function(){
+            var self = this;
+            var data = new FormData();
+            self.$submit_button.prop('disabled',true);
+
+            jQuery.each(self.$input_image[0].files, function(i, file) {
+                data.append('user_images[avatar]', file);
+            });
+            $.ajax({
+                /*
+                 xhr: function() {
+                 var xhr = new window.XMLHttpRequest();
+                 xhr.upload.addEventListener("progress", function(evt) {
+                 if (evt.lengthComputable) {
+                 var percentComplete = Math.floor((evt.loaded / evt.total)*100);
+                 self.$upload_assert.css("color","green").text("Uploading: " + percentComplete+ "%");
+                 if(percentComplete == 100){
+                 self.$upload_assert.css("color","green").text("done");
+                 }
+                 }
+                 }, false);
+                 return xhr;
+                 },
+                 */
+                url: '<%= url_for(:user_profile_update_image)%>',
+                data: data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                type: 'POST',
+                beforeSend : function(){
+                    self.$upload_assert.css("color","green").text("Processing..");
+
+                },
+                error : function(){
+                    alert("oops, Something wrong. Please try to reload page and try again.");
+                    self.resetButton();
+                },
+                success: function(response){
+                    self.OnSuccess(response);
+
+                }
+            });
+        };
+        var imageHandler = new  UploadHandler ("#image_form");
+
+    });
+
+
+</script>

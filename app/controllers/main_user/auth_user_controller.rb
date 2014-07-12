@@ -43,10 +43,10 @@ class MainUser::AuthUserController < ApplicationController
   # Post /usr/signup
   def post_signup
     @signup_user = SlapUser.new(signup_data)
+    @signup_user.user_images = [UserImages.new(:profile_image => 1)]
     respond_to do |format|
       if  @signup_user.save
-        user = SlapUser.order("created_at").last(1)
-        set_user_session(user.last)
+        set_user_session({:id => @signup_user.id})
         format.html { redirect_to :slap_index, notice:  t(:successful_signup) }
         format.json { render  json: { :result => 1,:info => t(:successful_signup) } ,status: 200}
       else
@@ -61,16 +61,18 @@ class MainUser::AuthUserController < ApplicationController
   end
   def facebook_login
     @red = url_for(return_user_url)
+    @error = false
     auth =request.env['omniauth.auth']
     @user = SlapUser.build_profile_omniauth(auth)
     user_id = SlapUser.check_uid(@user.uid)
       if user_id.blank?
         if @user.save
-         img = SlapUser.avatar_from_url(@user,auth.info.image)
+         img = UserImages.avatar_from_url(@user,auth.info.image)
          if img.save
            set_user_session({:id => @user.id})
          end
         else
+          @error = true
           return render :social_create
         end
       else

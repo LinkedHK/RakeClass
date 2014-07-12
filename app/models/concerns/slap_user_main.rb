@@ -17,12 +17,6 @@ module Concerns
         end
          result
       end
-      def avatar_from_url(user,url)
-      img =  UserImages.new(imageable: user,profile_image: 1)
-      img.avatar = URI.parse(url)
-      img
-      end
-
       def check_email(email)
         result = SlapUser.where(:email => email).select(:email).limit(1)
       end

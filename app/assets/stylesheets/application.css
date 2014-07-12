@@ -100,3 +100,24 @@ em {
     margin-top: 100px;
 }
 
+/* profile image uploader*/
+#profile_image_uploader  .modal-content .current_profile_image{
+    text-align: center;
+}
+#profile_image_uploader  .form-control{
+
+    margin-top: 7px;
+}
+.form-group > #input_image{
+    margin-top: 15px;
+    padding: 0 10px;
+
+}
+#profile_image_uploader .modal-content .modal-header {
+    padding: 15px;
+    border-bottom: 0px;
+    min-height: 16.42857143px;
+}
+
+
+

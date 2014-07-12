@@ -5,11 +5,10 @@ module  Users
       session[:user_id] = user.id
     end
 
-    def create_user_with_images
-     # UserImages.any_instance.stub(:save_attached_files)
-      img  =  FactoryGirl.create(:user_images)
-      @user = SlapUser.find(img.imageable_id)
+    def user_with_image
+      @user  =  FactoryGirl.create(:user_with_profile_image)
       auth_user(@user)
+      @user
     end
 
   end

@@ -16,3 +16,14 @@
 //= require_tree .
 
 //= require bootstrap.min
+
+/*
+ +-javascripts/
+ | +-application.js (manifest)
+ | +-paloma/
+ | | +-users/ (assuming you have a UsersController)
+ | | | +-new.js (assuming you have JavaScript you want to execute only for the "new" action)
+ | | +-foobars/ (assuming you have a FoobarsController)
+ | | | +-show.js (assuming you have JavaScript you want to execute only for the "show" action)
+ +-stylesheets/
+ */
