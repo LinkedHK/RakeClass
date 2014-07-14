@@ -119,12 +119,12 @@ RSpec.describe MainUser::AuthUserController, :type => :controller do
       }.to change(SlapUser,:count).by(1)
       expect(response).to have_http_status(200)
     end
-
      it 'User login with used email' do
        FactoryGirl.create(:omni_facebook_used_email)
        expect{
          get :facebook_login,request.env["omniauth.auth"]
        }.to change(SlapUser,:count).by(0)
+       expect(response).to have_http_status(200)
      end
   end
 

@@ -14,13 +14,6 @@
     before_create :randomize_file_name
     before_update :randomize_file_name
 
-
-    def self.avatar_from_url(user,url)
-
-      img =  UserImages.new(imageable: user,profile_image: 1)
-      img.avatar = URI.parse(url)
-      img
-    end
    private
     def randomize_file_name
       if avatar_file_name

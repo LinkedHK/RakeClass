@@ -7,9 +7,16 @@ class SlapProfile < ActiveRecord::Base
   validates_length_of :first_name, :maximum => 20
 
   def self.get_user_profile(user_id)
-    SlapUser.where(:id => user_id)
-    .select(:id,:email,:first_name,:last_name).first
-    #.joins(:user_user_imageses).where(:user_images => {:slap_user_id => user_id,:profile_image => 1})
+    @user = SlapUser.where(:id => user_id).select(:first_name,:last_name,:id).first
+  end
+  def self.update_profile_image(user_id,update_image_params)
+    @user = SlapUser.get_profile(user_id)
+    @img =  @user.user_images.where(:imageable_id => @user.id,:profile_image => 1).first
+    unless @img
+      @img = UserImages.new
+    end
+    @img.update_attributes(update_image_params)
+   return @img
   end
 
 end

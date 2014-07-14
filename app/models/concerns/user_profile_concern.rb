@@ -3,8 +3,9 @@ module Concerns
     extend ActiveSupport::Concern
     module ClassMethods
       include User
-      def build_profile_omniauth(auth)
+      def build_fb_profile(auth)
         user = SlapUser.new
+        user.user_images = [UserImages.new]
         user.via_ouath = true
         user.uid = auth.uid
         user.provider = auth.provider
@@ -15,7 +16,13 @@ module Concerns
         user.email = auth.info.email
         user.oauth_token = auth.credentials.token
         user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+        user.user_id = self.check_uid(auth.uid)
+        user.avatar = auth.info.image
         user
+      end
+
+      def get_user_by_id
+
       end
 
     end

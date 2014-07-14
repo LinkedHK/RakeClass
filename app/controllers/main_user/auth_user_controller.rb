@@ -60,26 +60,19 @@ class MainUser::AuthUserController < ApplicationController
 
   end
   def facebook_login
-    @red = url_for(return_user_url)
-    @error = false
     auth =request.env['omniauth.auth']
-    @user = SlapUser.build_profile_omniauth(auth)
-    user_id = SlapUser.check_uid(@user.uid)
-      if user_id.blank?
+      @user = SlapUser.build_fb_profile(auth)
+      @user.back_url = url_for(return_user_url)
+      if @user.user_id.blank?
         if @user.save
-         img = UserImages.avatar_from_url(@user,auth.info.image)
-         if img.save
+         if @user.user_images.create(avatar: @user.avatar,imageable: @user,profile_image: 1)
            set_user_session({:id => @user.id})
          end
-        else
-          @error = true
-          return render :social_create
         end
       else
-        #  else User with specified uid exists
-        set_user_session(user_id)
-      end
-     render :social_create
+      set_user_session(@user.user_id)
+    end
+    render :social_create
   end
 
   def social_failure
