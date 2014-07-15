@@ -4,14 +4,17 @@ FactoryGirl.define do
     email "test@example.com"
     password "secret"
     password_confirmation "secret"
-
+    first_name "John"
+    last_name "Smith"
     factory :user_with_profile_image do
       after(:create) do |slap_user|
            FactoryGirl.create(:profile_image,imageable: slap_user)
       end
     end
-
-
+    factory :updated_first_last_name do
+      first_name "Michael"
+      last_name "Jackson"
+    end
     factory :invalid_slap_user do
       username  ""
       email "test@example.com"
@@ -26,6 +29,7 @@ FactoryGirl.define do
         email "mock%example.com"
       end
     end
+
     factory :user_login do
       email "test@example.com"
       password "secret"

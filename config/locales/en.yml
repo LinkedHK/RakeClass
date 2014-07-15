@@ -45,6 +45,7 @@ en:
   successful_login: "You have been successfully logged in!"
   successful_signout: "You have been successfully signed out!"
   successful_signup: "Account has been successfully created!"
+  profile_update_successful: "Profile has been sucessfully updated"
   activerecord:
     attributes:
       slapitem:

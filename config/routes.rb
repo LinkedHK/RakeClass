@@ -44,6 +44,7 @@ Rails.application.routes.draw do
       post '/profile',to: 'user_profile#update_profile', as: 'user_profile_update'
       post '/profile/update_image',to: 'user_profile#update_image', as: 'user_profile_update_image'
 
+
     end
     match '/auth/facebook/callback', to: 'main_user/auth_user#facebook_login', via: [:get, :post]
     match '/auth/logout', to: 'main_user/auth_user#social_destroy', via: [:get, :post]

@@ -7,7 +7,6 @@ class SlapUser < ActiveRecord::Base
     attr_accessor :user_id
     attr_accessor :back_url
     attr_accessor :avatar
-
     has_many :user_images, as: :imageable,class_name: 'UserImages' ,:dependent => :destroy
     accepts_nested_attributes_for :user_images
     with_options unless: :via_ouath do |u|
@@ -19,17 +18,6 @@ class SlapUser < ActiveRecord::Base
     validates_length_of :last_name, :maximum => 20
     validates_length_of :first_name, :maximum => 20
 
-    def get_profile_image
-     @img = self.user_images.where(:profile_image => 1).first
-      unless @img
-        @img = UserImages.new
-      end
-      @img
-    end
-
-    def self.get_profile(user_id)
-      self.where(:id => user_id).select(:first_name,:last_name,:id).first
-    end
 end
 
 

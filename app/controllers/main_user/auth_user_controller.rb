@@ -65,16 +65,15 @@ class MainUser::AuthUserController < ApplicationController
       @user.back_url = url_for(return_user_url)
       if @user.user_id.blank?
         if @user.save
-         if @user.user_images.create(avatar: @user.avatar,imageable: @user,profile_image: 1)
-           set_user_session({:id => @user.id})
+          if @user.user_images.create(avatar: @user.avatar,imageable: @user,profile_image: 1)
+            set_user_session({:id => @user.id})
+          end
          end
-        end
       else
-      set_user_session(@user.user_id)
+    set_user_session(@user.user_id)
     end
     render :social_create
-  end
-
+    end
   def social_failure
     message_key = env['omniauth.error.type']
     new_path = "#{env['SCRIPT_NAME']}#{OmniAuth.config.path_prefix}/failure?message=#{message_key}"
