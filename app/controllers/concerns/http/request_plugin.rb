@@ -5,7 +5,6 @@ module Concerns
       ## Temporary poor solution :)
       LOGIN_FORM = :auth_user_login
       USR_HOME = :slap_index
-
       def require_auth
         unless has_id
           url = request.original_url
@@ -13,6 +12,7 @@ module Concerns
           redirect_to LOGIN_FORM
         end
       end
+
       def return_user_url
         return_url = get_return_session
         if return_url
@@ -31,13 +31,21 @@ module Concerns
           redirect_to  USR_HOME
         end
       end
+        def remote_ip
+          if request.remote_ip == '127.0.0.1' || request.remote_ip.blank?
+            # Hard coded remote address
+            '123.45.67.89'
+          else
+            request.remote_ip
+          end
+        end
+
       protected
       def get_return_session
         session[:return_url]
       end
       def set_return_session(url)
         session[:return_url] = url
-
       end
 
     end

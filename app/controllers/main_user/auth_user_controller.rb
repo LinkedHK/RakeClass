@@ -22,6 +22,7 @@ class MainUser::AuthUserController < ApplicationController
   end
 
   def post_login
+   # request_flood("login",3,5.minutes)
     @login_user = SlapLogin.new(login_data)
       respond_to do |format|
       if @login_user.valid?

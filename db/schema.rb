@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140707111520) do
+ActiveRecord::Schema.define(version: 20140722095933) do
+
+  create_table "request_flood", force: true do |t|
+    t.string   "client_ip"
+    t.string   "action"
+    t.integer  "attempt",         default: 1
+    t.integer  "threshold",       default: 4
+    t.datetime "expiration_date"
+  end
+
+  add_index "request_flood", ["action"], name: "index_request_flood_on_action", using: :btree
+  add_index "request_flood", ["client_ip"], name: "index_request_flood_on_client_ip", using: :btree
 
   create_table "sessions", force: true do |t|
     t.string   "session_id", null: false

@@ -1,6 +1,5 @@
 class CreateImagesTable < ActiveRecord::Migration
   def change
-
     create_table :user_images do |t|
         t.integer :imageable_id
         t.string  :imageable_type

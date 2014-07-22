@@ -12,6 +12,7 @@ gem 'omniauth'
 #gem 'open_uri_redirections'
 gem 'omniauth-facebook'
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
+#gem 'simple_captcha', :git => 'git://github.com/galetahub/simple-captcha.git'
 
 
 group :test do
