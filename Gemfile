@@ -7,7 +7,7 @@ gem 'rails', '4.1.4'
 gem 'pg'
 
 
-gem 'activerecord-session_store'
+gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
 gem 'omniauth'
 #gem 'open_uri_redirections'
 gem 'omniauth-facebook'

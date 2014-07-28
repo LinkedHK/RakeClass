@@ -20,9 +20,10 @@ Rails.application.routes.draw do
 
   #get ':controller(/:action/:name)', controller: 'clients'
 
-  root  to: 'slap_items#index'
+  root  to: 'categories#index'
 
-  get '/' , to: 'slap_items#index', as: 'slap_index'
+  get '/' , to: 'categories#index', as: 'slap_index'
+
   get '/items/:pg' , to: 'slap_items#index', as: 'slap_pagination'
   get 'slap_items/operation/edit/:id', to: 'slap_items#edit', as: 'slap_item_edit'
   get 'slap_items/operation/new', to: 'slap_items#new', as: 'slap_item_new'
