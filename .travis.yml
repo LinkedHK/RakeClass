@@ -8,8 +8,8 @@ script:
   - bundle exec rspec spec
   - bundle exec rake --trace db:migrate test
 before_script:
-  - psql -c 'create database slap_test;' - U postgres
-  - psql -c "alter user postgres with password 'test';" - U postgres
+  - psql -c 'create database slap_test;' -U postgres
+  - psql -c "alter user postgres with password 'test';" -U postgres
   #- echo "USE mysql;\nUPDATE user SET password=PASSWORD('test') WHERE user='root';\nFLUSH PRIVILEGES;\n" | mysql -u root
 rvm:
   - 2.0.0
