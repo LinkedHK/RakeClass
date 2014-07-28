@@ -11,35 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140722095933) do
+ActiveRecord::Schema.define(version: 20140727092403) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "request_flood", force: true do |t|
     t.string   "client_ip"
     t.string   "action"
-    t.integer  "attempt",         default: 1
-    t.integer  "threshold",       default: 4
+    t.integer  "attempt"
     t.datetime "expiration_date"
+    t.integer  "threshold",       default: 4
   end
 
   add_index "request_flood", ["action"], name: "index_request_flood_on_action", using: :btree
   add_index "request_flood", ["client_ip"], name: "index_request_flood_on_client_ip", using: :btree
-
-  create_table "sessions", force: true do |t|
-    t.string   "session_id", null: false
-    t.text     "data"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true, using: :btree
-  add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
-
-  create_table "slap_items", force: true do |t|
-    t.string   "item_title"
-    t.text     "item_description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+  add_index "request_flood", ["expiration_date"], name: "index_request_flood_on_expiration_date", using: :btree
 
   create_table "slap_users", force: true do |t|
     t.string   "username",         limit: 20
