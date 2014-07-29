@@ -32,7 +32,7 @@ module Concerns
         end
       end
         def remote_ip
-          if request.remote_ip == '127.0.0.1' || request.remote_ip.blank?
+          if request.remote_ip == '127.0.0.1' || request.remote_ip.blank? || Rails.env.test?
             # Hard coded remote address
             '123.45.67.89'
           else

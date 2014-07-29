@@ -1,6 +1,8 @@
 class MainUser::AuthUserController < ApplicationController
   before_action :check_auth, only: [:login,:post_login,:signup,:post_signup,:social_create]
  #before_action :resolve_fb_user, only: [:login]
+  before_filter :check_flooder
+
   def check_auth
     if has_id
       redirect_to :slap_index
@@ -22,6 +24,7 @@ class MainUser::AuthUserController < ApplicationController
   end
 
   def post_login
+    update_flooder(action_name)
    # request_flood("login",3,5.minutes)
     @login_user = SlapLogin.new(login_data)
       respond_to do |format|

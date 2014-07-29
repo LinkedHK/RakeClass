@@ -24,6 +24,13 @@ ActiveRecord::Migration.maintain_test_schema!
 require 'paperclip/matchers'
 
 RSpec.configure do |config|
+
+  # To wrap the anonymous controller
+  # http://stackoverflow.com/questions/22055889/how-to-test-a-controller-concern-in-rails-4
+
+
+  config.infer_base_class_for_anonymous_controllers = true
+
   config.include Paperclip::Shoulda::Matchers
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
