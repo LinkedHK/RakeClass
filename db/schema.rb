@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140729052623) do
+ActiveRecord::Schema.define(version: 20140807074615) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,8 @@ ActiveRecord::Schema.define(version: 20140729052623) do
     t.string   "provider"
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"
+    t.string   "inst_id"
+    t.string   "mobile_token"
   end
 
   add_index "slap_users", ["created_at", "updated_at"], name: "index_slap_users_on_created_at_and_updated_at", using: :btree

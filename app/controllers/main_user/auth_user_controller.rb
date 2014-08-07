@@ -1,7 +1,7 @@
 class MainUser::AuthUserController < ApplicationController
   before_action :check_auth, only: [:login,:post_login,:signup,:post_signup,:social_create]
  #before_action :resolve_fb_user, only: [:login]
-  before_filter :check_flooder
+  before_filter :check_flooder,except: [:test_login]
 
   def check_auth
     if has_id
@@ -21,6 +21,13 @@ class MainUser::AuthUserController < ApplicationController
       else
     redirect_to :slap_index
     end
+  end
+
+  def test_login
+
+
+
+  render json: {:result => 1, :info => t(:login_already_identified)}
   end
 
   def post_login
@@ -94,5 +101,9 @@ class MainUser::AuthUserController < ApplicationController
 
   def signup_data
     params.require(:slap_user).permit(:email,:username,:password,:password_confirmation)
+  end
+
+  def test_data
+    params.permit(:email,:password)
   end
 end

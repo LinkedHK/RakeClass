@@ -1,6 +1,27 @@
-class Api::V1::UserSessionsController < ApplicationController
-   include User
+class Api::V1::UserMobileAuthController < ApplicationController
   protect_from_forgery with: :null_session, :if => Proc.new { |c| c.request.format == 'application/vnd.slap.v1' }
+
+
+
+   def mobile_login
+
+     valid = true
+     if user = SlapMobileLogin.find_user_by_email(params[:email])
+       unless user.compare_passwords(params[:password])
+         valid = false
+       end
+     else
+       valid = false
+     end
+
+     if valid
+       render :json => { :result => 1,:info => user.build_response }, :status => 200
+     else
+       render :json => { :result => 0,:info => "Invalid login"}, :status => 200
+     end
+
+   end
+
   # Post /usr/rest/v1/login
   def post_login
     @login_user = SlapLogin.new(login_data)
@@ -31,6 +52,9 @@ class Api::V1::UserSessionsController < ApplicationController
       else
         render :json => { :result => 0,:info =>  @signup_user.errors, }, :status => 422
       end
+  end
+  def mobile_login_data
+    params.permit(:email,:password,:inst_id)
   end
   def login_data
     params.require(:slap_login).permit(:email,:password)

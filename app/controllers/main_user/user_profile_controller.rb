@@ -26,6 +26,9 @@ class MainUser::UserProfileController  < ApplicationController
         render :json =>  {:result => 0, :info => "Failure"}, status: 422
       end
   end
+
+
+
   private
   def update_image_params
     params.require(:user_images).permit(:avatar)

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe  Api::V1::UserSessionsController,:type => :controller  do
+RSpec.describe  Api::V1::UserMobileAuthController,:type => :controller  do
    context "Login Action" do
      before(:each) do
        FactoryGirl.create(:slap_user)

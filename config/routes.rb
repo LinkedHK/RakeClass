@@ -40,6 +40,8 @@ Rails.application.routes.draw do
       post '/signup' , to: 'auth_user#post_signup', as: 'auth_post_signup'
       get '/logout' , to: 'auth_user#logout', as: 'auth_user_logout'
 
+      post '/test_login', to: 'auth_user#test_login', as: 'auth_user_test'
+
     ## UserProfile controller
       get '/profile',to: 'user_profile#index', as: 'user_profile_index'
       post '/profile',to: 'user_profile#update_profile', as: 'user_profile_update'
@@ -60,9 +62,10 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: {format: :json} do
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: :true) do
-      post '/usr/rest/v1/login' , to: 'user_sessions#post_login', as: 'api_rest_user_login'
-      post '/usr/rest/v1/signup' , to: 'user_sessions#post_signup', as: 'api_rest_rest_user_signup'
-      post '/usr/rest/v1/logout' , to: 'user_sessions#logout', as: 'api_rest_rest_user_logout'
+      post '/usr/rest/v1/login' , to: 'user_mobile_auth#post_login', as: 'api_rest_user_login'
+      post '/usr/rest/v1/signup' , to: 'user_mobile_auth#post_signup', as: 'api_rest_rest_user_signup'
+      post '/usr/rest/v1/logout' , to: 'user_mobile_auth#logout', as: 'api_rest_rest_user_logout'
+      post '/usr/rest/v1/mobile_login' , to: 'user_mobile_auth#mobile_login', as: 'api_rest_rest_mobile_login'
     end
   end
 
